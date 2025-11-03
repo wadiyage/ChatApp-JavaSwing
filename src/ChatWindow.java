@@ -1,3 +1,6 @@
+
+import java.awt.Graphics;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,7 +11,7 @@
  *
  * @author Dell
  */
-public class ChatWindow extends javax.swing.JFrame {
+public class ChatWindow extends ChatRoom {
     public ControlRoom contrlRoom;
     /**
      * Creates new form ChatClientUI
@@ -20,12 +23,6 @@ public class ChatWindow extends javax.swing.JFrame {
         messageArea.setEditable(false);
         messageArea.setFocusable(false);
         
-        String receivedMessage = contrlRoom.receiveMessage();
-        System.out.println("Received message: "+receivedMessage);
-        String[] splitedNull = receivedMessage.split(":");
-        if(!splitedNull[1].equals("null")) {
-            messageArea.append(receivedMessage+"\n");
-        }
         
         inputField.requestFocus();
     }
@@ -148,8 +145,7 @@ public class ChatWindow extends javax.swing.JFrame {
         inputField.setText("");
         
         messageArea.append("Me: "+message+"\n");
-        // controlRoom > sendMessage(username, message)
-        contrlRoom.setMessage(message);
+        contrlRoom.setMessage("Ashani", message);
         
         inputField.requestFocus();
     }//GEN-LAST:event_sendButtonActionPerformed
@@ -159,6 +155,17 @@ public class ChatWindow extends javax.swing.JFrame {
         sendButton.doClick();
     }//GEN-LAST:event_inputFieldActionPerformed
 
+    @Override
+    public void update(String username, String message) {
+        super.update(username, message);
+        
+        messageArea.append(username+": "+message);
+    }
+
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -189,6 +196,7 @@ public class ChatWindow extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ChatWindow().setVisible(true);
             }

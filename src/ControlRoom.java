@@ -11,10 +11,12 @@ import java.util.ArrayList;
  * @author Dell
  */
 public class ControlRoom {
-    private ArrayList<ChatWindow> chatWindowList = new ArrayList<>();
+    private ArrayList<ChatRoom> chatWindowList = new ArrayList<>();
+    private String username;
     private String message;
     
-    public void setMessage(String message) {
+    public void setMessage(String username, String message) {
+        this.username=username;
         this.message=message;
         displayMessage();
         
@@ -28,19 +30,9 @@ public class ControlRoom {
     private void notifyReceivers() {
         //////
         for(ChatWindow chatWindow:chatWindowList) {
-            sendMessage();
-            System.out.println("Is working? ll");
+            chatWindow.update(username, message);
+            System.out.println("Are receivers working?");
         }
-    }
-    
-    private void sendMessage() {
-        receiveMessage();
-    }
-    
-    public String receiveMessage() {
-        String username="Taasha";
-        System.out.println("Sent message: "+message);
-        return username+":"+this.message;
     }
     
 }
