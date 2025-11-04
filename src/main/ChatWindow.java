@@ -1,5 +1,6 @@
+package main;
 
-import java.awt.Graphics;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,13 +13,18 @@ import java.awt.Graphics;
  * @author Dell
  */
 public class ChatWindow extends ChatRoom {
-    public ControlRoom contrlRoom;
+    private ControlRoom controlRoom;
+    
+    private String username;
     /**
      * Creates new form ChatClientUI
      */
-    public ChatWindow() {
-        contrlRoom = new ControlRoom();
+    public ChatWindow(ControlRoom controlRoom, String username) {
         initComponents();
+        this.controlRoom = controlRoom;
+        
+        this.username = username;
+        usernameLabel.setText(this.username);
         
         messageArea.setEditable(false);
         messageArea.setFocusable(false);
@@ -47,10 +53,14 @@ public class ChatWindow extends ChatRoom {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
         messageArea.setColumns(20);
+        messageArea.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
         messageArea.setRows(5);
         jScrollPane1.setViewportView(messageArea);
 
+        sendButton.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
         sendButton.setText("Send >");
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,13 +68,17 @@ public class ChatWindow extends ChatRoom {
             }
         });
 
+        inputField.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
         inputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputFieldActionPerformed(evt);
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(0, 0, 255));
+
         addButton.setFont(new java.awt.Font("Haettenschweiler", 0, 48)); // NOI18N
+        addButton.setForeground(new java.awt.Color(102, 102, 255));
         addButton.setText("+");
         addButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +86,9 @@ public class ChatWindow extends ChatRoom {
                 addButtonActionPerformed(evt);
             }
         });
+
+        usernameLabel.setFont(new java.awt.Font("Haettenschweiler", 0, 48)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(204, 204, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -114,7 +131,7 @@ public class ChatWindow extends ChatRoom {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sendButton)
@@ -134,10 +151,11 @@ public class ChatWindow extends ChatRoom {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        new ChatWindow().setVisible(true);
+        new AddSender(controlRoom).setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
@@ -145,7 +163,7 @@ public class ChatWindow extends ChatRoom {
         inputField.setText("");
         
         messageArea.append("Me: "+message+"\n");
-        contrlRoom.setMessage("Ashani", message);
+        controlRoom.setMessage(username, message);
         
         inputField.requestFocus();
     }//GEN-LAST:event_sendButtonActionPerformed
@@ -155,53 +173,18 @@ public class ChatWindow extends ChatRoom {
         sendButton.doClick();
     }//GEN-LAST:event_inputFieldActionPerformed
 
+    /**
+     *
+     * @param username
+     * @param message
+     */
     @Override
     public void update(String username, String message) {
-        super.update(username, message);
-        
-        messageArea.append(username+": "+message);
+        //super.update(username, message);
+        if(!this.username.equalsIgnoreCase(username)) 
+            messageArea.append(username+": "+message+"\n");
     }
-
     
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ChatWindow().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

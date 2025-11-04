@@ -1,3 +1,5 @@
+package main;
+
 
 import java.util.ArrayList;
 
@@ -11,27 +13,24 @@ import java.util.ArrayList;
  * @author Dell
  */
 public class ControlRoom {
-    private ArrayList<ChatRoom> chatWindowList = new ArrayList<>();
+    private ArrayList<ChatRoom> roomList = new ArrayList<>();
     private String username;
     private String message;
+    
+    public void addChatRoom(ChatRoom chatRoom) {
+        roomList.add(chatRoom);
+    }
     
     public void setMessage(String username, String message) {
         this.username=username;
         this.message=message;
-        displayMessage();
         
         notifyReceivers();
     }
     
-    private void displayMessage() {
-        System.out.println("Setted message: "+message);
-    }
-    
     private void notifyReceivers() {
-        //////
-        for(ChatWindow chatWindow:chatWindowList) {
-            chatWindow.update(username, message);
-            System.out.println("Are receivers working?");
+        for(ChatRoom room:roomList) {
+            room.update(username, message);
         }
     }
     

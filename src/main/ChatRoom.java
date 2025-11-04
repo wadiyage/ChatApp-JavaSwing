@@ -1,3 +1,5 @@
+package main;
+
 
 import javax.swing.JFrame;
 
@@ -12,6 +14,11 @@ import javax.swing.JFrame;
  */
 public class ChatRoom extends JFrame {
     
+    /**
+     *
+     * @param username
+     * @param message
+     */
     public void update(String username, String message) {
         
     }
