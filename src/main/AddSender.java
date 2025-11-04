@@ -64,6 +64,7 @@ public class AddSender extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         inputField.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
+        inputField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputFieldActionPerformed(evt);
@@ -71,7 +72,8 @@ public class AddSender extends javax.swing.JFrame {
         });
 
         addButton.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
-        addButton.setText("Add");
+        addButton.setText("ADD");
+        addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);

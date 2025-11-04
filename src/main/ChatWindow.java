@@ -61,7 +61,8 @@ public class ChatWindow extends ChatRoom {
         jScrollPane1.setViewportView(messageArea);
 
         sendButton.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
-        sendButton.setText("Send >");
+        sendButton.setText("SEND >");
+        sendButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendButtonActionPerformed(evt);
@@ -69,6 +70,7 @@ public class ChatWindow extends ChatRoom {
         });
 
         inputField.setFont(new java.awt.Font("Haettenschweiler", 0, 18)); // NOI18N
+        inputField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         inputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputFieldActionPerformed(evt);
@@ -77,9 +79,11 @@ public class ChatWindow extends ChatRoom {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 255));
 
+        addButton.setBackground(new java.awt.Color(255, 0, 0));
         addButton.setFont(new java.awt.Font("Haettenschweiler", 0, 48)); // NOI18N
-        addButton.setForeground(new java.awt.Color(102, 102, 255));
+        addButton.setForeground(new java.awt.Color(0, 0, 0));
         addButton.setText("+");
+        addButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,9 +99,9 @@ public class ChatWindow extends ChatRoom {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
